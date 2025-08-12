@@ -1,6 +1,12 @@
 $a-width: 90%;
 $a-height: 4vh;
 $app-margin: 1rem 0;
-$bg-welcome-view:linear-gradient(to bottom, #e74c3c, #000000);
+$bg-welcome-view: linear-gradient(to bottom, #e74c3c, #000000);
 $bg-meat-view: green;
 $bg-side-view: pink;
+:root {
+   --bg-welcome-view: #{$bg-welcome-view};
+   --bg-meat-view: #{$bg-meat-view};
+   --bg-side-view: #{$bg-side-view};
+
+}

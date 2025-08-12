@@ -25,9 +25,10 @@ const navFontColor = computed(() => {
 // 배경 색상 computed
 const navBgColor = computed(() => {
   switch (route.name) {
-    case 'meat': return 'green'
-    case 'side': return 'pink'
-    default:     return '#f3f3f3'
+      case 'welcome': return 'var(--bg-welcome-view)'
+      case 'meat': return 'var(--bg-meat-view)'
+      case 'side': return 'var(--bg-side-view)'
+      default:     return '#f3f3f3'
   }
 })
 
@@ -41,13 +42,13 @@ const navBgColor = computed(() => {
          <div>
             <div> Hello! </div>
          </div>
-         <nav class="app-nav"
-         :style="{
-      '--nav-font-color': navFontColor,
-      '--nav-bg-color': navBgColor
-    }"
+         <nav  class="app-nav"
+               :style="{
+                  '--nav-font-color': navFontColor,
+                  '--nav-bg-color': navBgColor
+               }"
          >
-            <RouterLink to="/" exact> Welcome</RouterLink>
+            <RouterLink to="/" > Welcome</RouterLink>
             <RouterLink to="/meat"> BBQ </RouterLink>
             <RouterLink to="/side">  SideMenu </RouterLink>
             <RouterLink to="/eso" > Espresso </RouterLink>
@@ -100,19 +101,17 @@ const navBgColor = computed(() => {
             @include layout-div(flex, center, center, row);
 
             //font
-            // color: white;
             font-weight: bold;
             text-decoration: none;
             // a tag div background color
             @include border-style($mobile-border, 0.5rem);
-            // background: linear-gradient(to bottom, #e74c3c, #000000);
 
             &.router-link-active {
                font-weight: bold;
                // 활성 링크의 배경 및 텍스트 색상도 변수 기반으로 적용 가능
-               // @include nav-bg-color;
+               // linear-gradiant 는 background or background-image 에 적용
                color: var(--nav-font-color);
-  background-color: var(--nav-bg-color);
+               background: var(--nav-bg-color);
             }
          }
       }

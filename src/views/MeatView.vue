@@ -15,11 +15,11 @@
 
 <template>
     <div class="meat-view">
-        <!-- <Swiper 
+        <Swiper 
         :slidesData="data.meat" 
         :swiperSpeed="swiperSpeed"
         :slidesPerView="slidesPerView"
-        :spaceBetween="spaceBetween" /> -->
+        :spaceBetween="spaceBetween" /> 
     </div>>
 </template>
 
@@ -28,7 +28,7 @@
    @use '../assets/style/appStyle.scss'  as *;        
    .meat-view {
       height: 100vh;
-      background-color: $bg-meat-view; 
+      // background-color: $bg-meat-view; 
    }
 
 </style>
