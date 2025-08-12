@@ -1,0 +1,243 @@
+// 변수 먼저 선언 하고 사용
+// @use './mixinVar.scss' as *;
+@use './fontVar.scss' as *;
+@use './font.scss' as *;
+
+
+@mixin gird-set-auto($grid-set-width, $gap-num) {
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax($grid-set-width, 2fr));
+   gap: $gap-num; 
+}
+// grid size 
+// 한 행에 width가 각각 다른 div 생성 
+@mixin grid-differ($grid-columns, $gap-updown, $gap-rl) {
+   display: grid;
+   grid-template-columns: #{join($grid-columns, ' ')};
+   gap: $gap-updown $gap-rl;
+}
+// 한 행에 div 동일한 크기로 생성  
+@mixin div-num($grid-col-num, $gap-row, $gap-col) {
+   display: grid;
+   grid-template-columns: $grid-col-num; 
+   gap: $gap-row $gap-col;
+}
+// grid size - 메뉴가 없는 경우
+@mixin box-none-menuTi($grid-col-num, $gap-row, $gap-col)  {
+   .menuTi {
+      display: none !important;
+   }
+   .content {
+      @include div-num($grid-col-num, $gap-row, $gap-col);
+   }
+}
+
+// div layout 
+@mixin div-layout($justify-content,$align-items,$flex-direction) {
+  display: flex;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-direction: $flex-direction;
+}
+
+/* border  처리 */
+@mixin border-none($border-padding, $border-margin-bottom) {
+   @include border($border-padding,$border-margin-bottom);
+   .content .border {
+      box-shadow: none !important;
+      margin-bottom: 0;     
+      padding: calc(#{$border-padding} * 0.25) 0; 
+   }
+}
+
+// border 안에 div's layout
+@mixin group-layout($gap, $justify-content, $align-items) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $gap;
+  justify-content: $justify-content;
+  align-items: $align-items;
+}
+// group-layout 마지막 요소는 오른쪽으로 정렬
+@mixin group-layout-last-right {
+   margin-left: auto;
+   white-space: nowrap;
+}
+// group-layout 마지막 요소는 왼쪽으로 정렬
+@mixin group-layout-last-left {
+   margin-right: auto;
+   white-space: nowrap;
+}
+
+// border style mixin - 변수를 한번에 지정해서 함수로 사용 - map
+
+// line : Mixin에서 Map 인자로 받아서 변수 꺼내 쓰기
+// 기본 line-height 먼저 지정
+$line-height: 1.5rem; 
+$padding: 0 0.4rem;
+@mixin div-layout-line ($vars) {
+  height: map-get($vars, height);
+  line-height: map-get($vars, line-height);
+  padding: map-get($vars, padding);
+  display: flex;
+}
+$basic-line: (
+  height: $line-height,
+  line-height: $line-height,
+  padding: $padding
+);
+
+
+// price 위치 변동을 위한 css 
+@mixin class-order($en, $ko, $ex, $price) {
+   display: flex;
+   white-space: nowrap;
+   flex-wrap: wrap; 
+  
+   .en { order: $en;}
+   .ko { order: $ko;}
+   .ex { order: $ex; 
+         flex-basis: 100%;  // 줄바꿈 효과
+          width: 100%;       // 옵션: `.ex`가 줄 전체 너비 차지
+   }
+   .price { order: $price;}
+} 
+
+/* div inline-block */
+@mixin div-inline-block ($float) {
+   display: inline-block;
+   vertical-align: middle;
+   overflow: hidden;   /* float: right; 다음에 영향을 주지 못하도록  */
+   
+   &:last-child {       /* &: 부모의 자식요소 선택시 필요  */
+      float: #{$float};
+   }   
+}
+/* img size */
+@mixin img-size( $img-width, $img-height) {
+   width: $img-width;
+   height: $img-height;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   // object-fit: contain;
+}
+//background image 
+@mixin img-background( $img-background-height) {
+    position: relative;
+    overflow: hidden;
+
+   .img {
+      position: absolute;
+      width: 100%;
+      height: $img-background-height;
+      // background-size: cover;
+      object-fit: cover;       /* 이미지를 비율 유지하며 꽉 채우기 */
+      z-index: 0;
+
+   } 
+   .img::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      opacity: 0.5;
+      background-color: black;  /* 오버레이 색 */
+      z-index: 1;
+   }
+   > div {
+      position: relative;
+      color: white;            /* 텍스트 색상은 배경과 대비되는 색으로 */
+      text-shadow: 0 0 8px rgba(0,0,0,0.7); /* 텍스트 가독성 향상 */
+      z-index: 2;
+   }                
+}
+
+
+/* br 처리 */
+@mixin br($br-line-height) {
+   white-space: pre-line; 
+   line-height: $br-line-height;
+}
+
+@mixin underline-top($color ,$width, $kind , $underline-padding, $underline-margin) {
+   border-top: $color $width $kind;
+   padding: $underline-padding;
+   margin: $underline-margin;
+}
+
+//mixin + minxin
+// price & ko layout 
+@mixin layout-order-between($basic-line) {
+   .ko {
+      @include div-layout-line ($basic-line);
+   }
+   .price {
+      @include div-layout-line ($basic-line);
+      @include group-layout-last-right ();
+   }
+}
+// @mixin layout-order-between($basic-line) {
+//    @include div-inline-block ($float);
+   
+// }
+
+
+// New
+@mixin layout-div($display, $justify-content, $align-items, $flex-direction){
+   display: $display;
+   justify-content: $justify-content;
+   align-items: $align-items;
+   flex-direction: $flex-direction;
+}
+@mixin border-style() {
+}
+
+// 사용 예: @include border-style($basic-border, 50%);
+// 공통 border 스타일 mixin
+$radius: 0;
+@mixin border-style($vars, $radius: null) {
+  box-sizing: border-box;
+  box-shadow: map-get($vars, shadow);
+  margin: map-get($vars, margin);
+  padding: map-get($vars, padding);
+  border-radius: if($radius != null, $radius, map-get($vars, radius));
+}
+
+// Border 스타일 Map 정의
+$basic-border: (
+  padding: 0.9rem 1.3rem 1rem 1.3rem,
+  margin: 0 0 1.25rem 0,
+  shadow: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.8),
+  radius: $radius
+);
+
+$img-border: (
+   shadow: (
+      rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+      rgba(60, 64, 67, 0.15) 0px 1px 3px 1px
+   ),
+   padding: 0,
+   margin: 0,
+   radius: $radius
+);
+
+$mobile-border: (
+   shadow: (
+      rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em,
+               rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em,
+               rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset
+      ),
+   padding: 0,
+   margin: 0,
+   radius: $radius
+);
+// nav 
+// @mixin nav-bg-color( $font-color, $bg-color){
+//    color: $font-color;
+//    background: $bg-color;
+// }
+// nav의 배경/글자색을 CSS 변수 기반으로 적용하는 믹스인
+@mixin nav-bg-color {
+  color: var(--nav-font-color);
+  background-color: var(--nav-bg-color);
+}

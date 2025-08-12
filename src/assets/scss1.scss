@@ -1,0 +1,109 @@
+$border:  rgb(255, 255, 255) soild 1rem;
+$bc: rgb(255, 255, 255);
+$ko: rgb(251, 237, 237);
+$border: 0.3rem solid red;
+$sideWidth: 27%;
+//$campKindBorderHeight: 45vh;
+$campKindBorderHeight: 40vh;
+$pWidth: 40%;
+
+
+$campKindBorderWidth: 100%;
+$campKindImgHeight: 55%;
+$widthTwo: 50%;
+$width-num: 0.6;
+$border-padding-tb: 1.2rem  ;
+$border-padding-rl: 1.5625rem; 
+$camp-border-div: calc(#{$campKindBorderHeight} - #{$border-padding-tb} * 2 ); 
+$setItem-margin-top: 1rem;
+
+$fruitZone: 1.2rem;
+$cafeLineHight: 0.27rem;
+
+
+/* div layout */
+@mixin div-layout($row-layout) {
+   display: flex;  
+   justify-content:  #{join($row-layout ,' ')};
+}
+@mixin div-layout-line ($line) {
+  height: $line; line-height: $line; 
+  display: flex;  justify-content: space-between;
+}
+/* 한 행에 div 동일한 크기로 생성  */
+@mixin div-num($grid-col-num, $gap-row, $gap-col) {
+   display: grid;
+   grid-template-columns: $grid-col-num; 
+   gap: $gap-row $gap-col;
+}
+/* 한 행에 width가 각각 다른 div 생성 */
+@mixin div-num-differ($grid-columns, $gap-row, $gap-col) {
+  display: grid;
+  grid-template-columns: #{join($grid-columns, ' ')};
+  gap: $gap-row $gap-col;
+}
+/* munuTi 가 필요없는 layout */
+@mixin box-no-menuTi($grid-col-num, $gap-row, $gap-col)  {
+   .menuTi {
+      display: none !important;
+   }
+   .content {
+      @include div-num($grid-col-num, $gap-row, $gap-col);
+   }
+}
+/* div inline-block */
+@mixin div-inline-block ($float) {
+   display: inline-block;
+   vertical-align: middle;
+   overflow: hidden;   /* float: right; 다음에 영향을 주지 못하도록  */
+   
+   &:last-child {       /* &: 부모의 자식요소 선택시 필요  */
+      float: #{$float};
+   }   
+}
+
+
+// img size - grid 
+@mixin img-size( $img-width, $img-height) {
+   width: $img-width;
+   height: $img-height;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   // object-fit: contain;
+
+}
+
+/* br 처리 */
+@mixin br($br-line-height) {
+   white-space: pre-line; 
+   line-height: $br-line-height;
+}
+
+/* border  처리 */
+@mixin border($border-padding, $border-margin-bottom)  {
+   box-sizing: border-box;
+   box-shadow: 0 1.25rem 3.125rem rgba(0, 0, 0, 0.8); 
+   margin-bottom: $border-margin-bottom;     
+   padding : $border-padding calc(#{$border-padding} - 0.1rem) ; 
+}
+@mixin border-none($border-padding, $border-margin-bottom) {
+   @include border($border-padding,$border-margin-bottom);
+   .content .border {
+      box-shadow: none !important;
+      margin-bottom: 0;     
+      padding: calc(#{$border-padding} * 0.25) 0; 
+   }
+}
+// price 위치 변동을 위한 css 
+@mixin class-order($en, $ko, $ex, $price) {
+   display: flex;
+   //white-space: nowrap;
+   flex-wrap: wrap; 
+  
+
+   .en { order: $en;}
+   .ko { order: $ko;}
+   .ex { order: $ex;}
+   .price { order: $price;}
+}   

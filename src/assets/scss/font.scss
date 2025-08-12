@@ -1,0 +1,84 @@
+// import order 중요. 변수 먼저 선언
+@use './fontVar.scss' as *;
+
+
+// Basic font variables
+// $ko-font:  'twayair';
+// $en-font: 'Poppins';
+// $ex-font: 'HancomMalangMalang-Regular';
+// $menuTi-font: "paytone One";
+// $ko-size: 1.125rem; /* ko size 에 맞추어서  타 글자 크기 조정 */
+// $en-color: #676767;
+// $ko-color: #fff;
+// $ex-color: #807F80;
+// $price-color: #a1a0a7;
+// $menuTi-color:#696969;
+// $en-before-content:'∙';
+// $en-before-ml: 0.5rem;
+
+
+$basic-font: (
+   ko-font:  $ko-font, 
+   en-font: $en-font,
+   ex-font: $ex-font,
+   menuTi-font: $menuTi-font,
+   ko-size: $ko-size,  /* ko size 에 맞추어서  타 글자 크기 조정 */
+   en-color: $en-color,
+   ko-color: $ko-color,
+   ex-color: $ex-color,
+   price-color: $price-color,
+   menuTi-color:$menuTi-color,
+   en-before-content:$en-before-content,
+   en-before-color: $en-before-color,
+   en-before-margin: $en-before-margin
+);
+
+@mixin font-style($vars) {
+  .ko {
+    font-family: map-get($vars, ko-font);
+    font-size: map-get($vars, ko-size);
+    color: map-get($vars, ko-color);
+    font-weight: normal;
+  }
+
+  .en {
+    font-family: map-get($vars, en-font);
+    font-size: map-get($vars, ko-size) * 0.95;
+    color: map-get($vars, en-color);
+   //  margin-left: 1rem;
+  }
+
+  .en::before {
+    content: map-get($vars, en-before-content);
+    margin-right: map-get($vars, en-before-margin ) ;
+    color: map-get($vars, en-before-color);
+  }
+
+  .ex {
+    color: map-get($vars, ex-color);
+    font-family: map-get($vars, ex-font);
+    font-size: map-get($vars, ko-size) * 0.83;
+  }
+
+  .menuTi {
+    color: map-get($vars, menuTi-color);
+    font-family: map-get($vars, menuTi-font);
+    text-transform: uppercase;
+    display: block;
+    font-size: map-get($vars, ko-size) * 1.94;
+    letter-spacing: -0.1875rem;
+    opacity: 0.3;
+  }
+
+  .price {
+    color: map-get($vars, price-color);
+    font-family: map-get($vars, price-font);
+    font-size: map-get($vars, ko-size) * 0.83;
+  }
+}
+
+
+
+
+
+

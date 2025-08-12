@@ -1,0 +1,22 @@
+/* eso latte_box */
+.cafe .big .tc > div {  width: 31%; }
+.cafe .latte { height: 1.7rem; width: 2.3rem;}
+.cafe .saucer {background-color:#757575;}
+.cafe .cafeLatte1 .latte { position: absolute; top: 2.3rem; left: -0.9rem;  }
+.cafe .cafeLatte1 .saucer{ 
+    position: absolute; top: 2.4rem; left: -10.9rem;
+}
+.cafe .cafeLatte1 .cup_body { background-color: #696969 ;}
+.cafe .cafeLatte1 .cup_handle { 
+    border : 2px solid  #676767;
+    transform: scaleX(-1); /* 컵 핸들 방향 전환 */
+    margin-top: 0px;
+    margin-left: 2px;
+}
+
+.cafe .cafeLatte2 .latte  { position: absolute; top: 2.3rem; left: 3.1rem; }
+.cafe .cafeLatte2 .saucer { 
+    position: absolute; top: 2.4rem; left: -8.3rem;
+}
+.cafe .cafeLatte2 .cup_body { background-color:#807F80 ;}
+.cafe .cafeLatte2 .cup_handle { border : 2px solid #696969; margin-top: 0px; margin-left: 28px; }

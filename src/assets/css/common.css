@@ -1,0 +1,31 @@
+/* title effective */
+.title {
+    margin-bottom: 1.25rem; 
+    font-family: Poppins-Regular;
+    font-size: 1.18rem;
+    display: block;
+    height: 1.25rem;
+    line-height: 1.25rem;
+    position: relative;
+    border-radius: 0.3rem;
+    background-size: cover;
+    padding: 0.5rem 0.625rem;
+    box-shadow: 0.063rem 0.188rem 0.063rem -0.188rem #777;
+    transition: background 450ms ease-in-out;
+}
+.shadow {
+   position: relative;
+}
+.shadow:before {
+   z-index: -1;
+   position: absolute;
+   content: "";
+   bottom: 0.8125rem;   /* 13px → 0.8125rem */
+   right: 0.4375rem;    /* 7px → 0.4375rem */
+   width: 25%;
+   top: 0;
+   box-shadow: 0 0.9375rem 0.625rem #777; /* 15px → 0.9375rem, 10px → 0.625rem */
+   transform: rotate(4deg);
+   transition: all 150ms ease-in-out;
+}
+

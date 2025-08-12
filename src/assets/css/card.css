@@ -1,0 +1,80 @@
+        /* side  */
+        .cardBox{ 
+            width: 100%; 
+            position: relative;
+         }
+         
+         /* card 전체 크기 */
+         .cardBox .card { 
+            position: relative; width: 100%; height: auto; padding-bottom: 1rem; color: #fff;
+         }
+         .cardBox .card .face {  
+            width: 100%; height: 10.5rem; transition: 0.5s;
+         }
+         .cardBox .card .face.face1 {
+            position: relative;
+            background-color: #333 !important; /*  처음 카드 화면 */
+            display: flex;  justify-content: center;  align-items: center;
+            z-index: 1;
+            transform: translateY(5rem);
+        }
+        /*  처음 카드 화면이 바탕색 -> background-color: #333 !important;  적용안됨 */
+        /*  이유: background image 설정 */
+        .cardBox .card .face.face1 .img {
+            display: none;
+        }
+        .cardBox .card.active .face.face1 .img {
+            display: block;
+        }
+        /*  img 위에 중앙 위치 */
+        .cardBox .card .face.face1 > div {  
+           position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+         }
+         .cardBox .card.active .face.face1 { transform: translateY(0); }
+
+        .cardBox .card .face.face1 div { opacity: 0.5;  transition: 0.5s; }
+        .cardBox .card .face.face1 .ko {
+            padding: 0;  color: #fff;   text-align: center; 
+            /* margin-bottom: 1rem; margin-left: 0rem;  */
+            /* margin: 1rem 0; */
+            
+        }
+        .cardBox .card.active .face.face1 div { opacity: 1; }
+
+
+        /* 카드 이미지가 보일 때 ko 안보임 */
+        .cardBox .card.active .face.face1 .img  .icon, 
+        .cardBox .card.active .face.face1  .ko, 
+        .cardBox .card.active .face.face1  .price {    display: none;  }
+
+        /* image */
+        .cardBox  .icon {
+            width: 2.4vw;  height: 5.8vh;
+            position: absolute;  top: 5.7vh;  right: 3.1vw; opacity: 0.9;
+        }
+        .cardBox .card .img {width: 100%; height: 100%;}
+        
+        .cardBox .card.active .face.face1 .video,
+        .cardBox .card.active .face.face1  { opacity: 1;  }/* 동영상 보임 */
+
+        
+
+                /* 메뉴 설명 */
+        .cardBox .card .face.face2 {
+            position: relative;
+            box-sizing: border-box;  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            transform: translateY(-4.5rem);
+            background-color: #333;
+            word-break: normal;        /* 단어 단위로 줄 바꿈 */
+         }
+         .cardBox .card.active .face.face2{  transform: translateY(0);  }
+         .cardBox .card.active .face.face2  { 
+            width: 100%;  height: inherit; padding: 1rem 1.2rem;  box-sizing: border-box;
+         }
+
+        .sideMenu { width: 100%; height: 10%; color: white; line-height: 1.4rem;  }
+        .sideMenu .swiper { width: 100%; height: 100%; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);  }
+        .sideMenu .icon {
+            width: 3.2vw;  height: 5.8vh; opacity: 0.7; padding-top: 1rem;
+            position: absolute;  top: 50%;  left: 50%; transform: translate(-50%, -50%); 
+        }

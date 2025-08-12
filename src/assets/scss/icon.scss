@@ -1,0 +1,51 @@
+
+$icon-path: "../assets/icon";
+$icon-default-size: 7rem;   
+
+// icon 믹스인
+@mixin icon($name, $icon-width, $icon-height, $icon-position, $icon-top, $icon-left, $icon-transform) {
+    width: $icon-width;
+    height: $icon-height;
+    background-image: url("#{$icon-path}/#{$name}.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+
+    position: $icon-position; 
+    top: $icon-top;
+    left: $icon-left;
+    transform: $icon-transform;
+  }
+
+
+ /* 여러 아이콘을 background 로 겹치기 */
+@mixin multi-icon(
+    $names,
+    $sizes: (),
+    $repeats: (),
+    $positions: ()
+  ) {
+    $imgs: ();
+    $size-list: ();
+    $repeat-list: ();
+    $pos-list: ();
+  
+    @for $i from 1 through length($names) {
+      $name: nth($names,$i);
+      $imgs : append($imgs, url("#{$icon-path}/#{$name}.png"), comma);
+  
+      $size   : if(length($sizes)    >= $i, nth($sizes,$i), contain);
+      $repeat : if(length($repeats)  >= $i, nth($repeats,$i), no-repeat);
+      $pos    : if(length($positions)>= $i, nth($positions,$i), center);
+  
+      $size-list   : append($size-list,   $size,   comma);
+      $repeat-list : append($repeat-list, $repeat, comma);
+      $pos-list    : append($pos-list,    $pos,    comma);
+    }
+  
+    background-image   : $imgs;
+    background-size    : $size-list;
+    background-repeat  : $repeat-list;
+    background-position: $pos-list;
+    /* transform 은 요소 밖에서(혹은 ::before/after) 개별 적용 */
+  }
